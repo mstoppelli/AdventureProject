@@ -1,0 +1,4 @@
+Locations/World separated
+Locations as map classes
+locations have an explore event, grabs list of events that could happen
+dungeons can randomly get a "findexit" event after x explores
