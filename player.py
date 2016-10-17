@@ -7,7 +7,7 @@ class Player(Character):  # the player
         self.maxhp = 100  # so we know where to heal/what not to go over
         self.inventory = []  # should hold instances of items
         self.location = None  # current location
-        self.equipment = {'weapon': None, 'armor': None, 'shield': None} # what's equipped with keywords
+        self.equipment = {'weapon': None, 'armor': None, 'shield': None}  # what's equipped with keywords
         super().__init__(name, 0, 2)  # set our name,
 
     def __str__(self):
@@ -21,7 +21,7 @@ class Player(Character):  # the player
         for i in inv:
             print(i)
 
-    def _isAlive(self):
+    def is_alive(self):
         if self.hp <= 0:
             return False
         else:
@@ -32,7 +32,7 @@ class Player(Character):  # the player
 
     def where_am_i(self):
         desc = 'You are in %s' % self.location
-        print(desc)
+        return desc
 
     def get_damage(self):
         weapon = self.equipment['weapon']

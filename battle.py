@@ -1,10 +1,13 @@
-import characters, player
+def take_action():
+    action = input('What would you like to do?')
+    actions = ['attack', 'defend', 'flee', 'item']
+    if action in actions:
+        return action
+    else:
+        print('Please input a valid action.')
+        return take_action()
 
-def do_battle(player, enemy):
-    while enemy.is_alive():
-        action = input('What would you like to do?')
-        if action == 'attack':
-            raise NotImplementedError
-        elif action == 'defend':
-            raise NotImplementedError
-        
+def fight(player, enemy):
+    print('You are fighting a %s!' % enemy)
+    while enemy.is_alive() and player.is_alive():
+        action = take_action()
