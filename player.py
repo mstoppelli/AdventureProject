@@ -40,3 +40,21 @@ class Player(Character):  # the player
             return 1
         else:
             return weapon.dmg
+
+    def get_equipped(self, slot):
+        if slot == 'weapon' and self.equipment[slot] is None:
+            return 'fists'
+        elif slot == 'armor' and self.equipment[slot] is None:
+            return 'naked body'
+        elif slot == 'shield' and self.equipment[slot] is None:
+            return 'nothing'
+        else:
+            return self.equipment[slot].name
+
+    def attack(self, target):
+        dmg = self.get_damage()
+        target.hp -= dmg
+        dmg = formatText(str(dmg), 'BOLD')
+        msg = 'You attacked {} with your {}. {} took {} damage.'.format(target.name, self.get_equipped('weapon'), target._genpronoun(), dmg)
+        msg = formatText(msg, 'RED')
+        print(msg)

@@ -1,5 +1,6 @@
 from player import *
 from maps import *
+from battle import *
 
 
 def game_start():
@@ -14,3 +15,4 @@ def gen_player():  # Catch all for getting our player, in case we add args
 
 player = gen_player()  # THIS IS OUR PLAYER, NEVER AGAIN USE Player()
 game_start()
+battle(player, Rat())

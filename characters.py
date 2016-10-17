@@ -50,6 +50,13 @@ class Enemy(Character): # for combat specific vars, maybe make allies later
         else:
             return True
 
+    def attack(self, target):
+        target.hp -= self.dmg
+        dmg = formatText(str(self.dmg), 'BOLD')
+        msg = '{} attacked you. You took {} damage.'.format(self.name, dmg)
+        msg = formatText(msg, 'RED')
+        print(msg)
+
 #---------Enemy Definitions-------
 class Rat(Enemy):
     def __init__(self):
