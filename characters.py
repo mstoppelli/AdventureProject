@@ -1,4 +1,4 @@
-from text import *
+from utilities import *
 #----------Base Character Classes-------------
 class Character:  # Generic character class
     def __init__(self, name, disposition,
@@ -33,6 +33,7 @@ class Enemy(Character): # for combat specific vars, maybe make allies later
     def __init__(self, name, gender, hp, dmg): # we take same vars
         self.hp = hp # assign new ones (health and dmg)
         self.dmg = dmg
+        self.maxhp = self.hp
         super().__init__(name, -100, gender) # pass the first 2 vars on, but disposition is always -100. they're enemies
 
     def _vowelcheck(self): # if hte name starts with a vowel, use an before name. else, a
@@ -56,6 +57,13 @@ class Enemy(Character): # for combat specific vars, maybe make allies later
         msg = '{} attacked you. You took {} damage.'.format(self.name, dmg)
         msg = formatText(msg, 'RED')
         print(msg)
+
+    def print_health(self):
+        hp = self.hp
+        maxhp = self.maxhp
+        bar = '[' + '-' * int(((hp / maxhp) * 10)) + ']'
+        bar = formatText(bar, 'RED')
+        return(bar)
 
 #---------Enemy Definitions-------
 class Rat(Enemy):

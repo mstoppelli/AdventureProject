@@ -1,3 +1,4 @@
+import os
 class color:
    PURPLE = '\033[95m'
    CYAN = '\033[96m'
@@ -13,3 +14,6 @@ class color:
 def formatText(text, type):
     type = getattr(color, type)
     return type + text + color.END
+
+def clear():
+    os.system('cls')

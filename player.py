@@ -55,6 +55,13 @@ class Player(Character):  # the player
         dmg = self.get_damage()
         target.hp -= dmg
         dmg = formatText(str(dmg), 'BOLD')
-        msg = 'You attacked {} with your {}. {} took {} damage.'.format(target.name, self.get_equipped('weapon'), target._genpronoun(), dmg)
-        msg = formatText(msg, 'RED')
+        msg = 'You attacked {} with your {}. {} took {} damage.'.format(target.name, self.get_equipped('weapon'),
+                                                                        target._genpronoun(), dmg)
         print(msg)
+
+    def print_health(self):
+        hp = self.hp
+        maxhp = self.maxhp
+        bar = '[' + '-' * int(((hp / maxhp) * 10)) + ']'
+        bar = formatText(bar, 'GREEN')
+        return(bar)
