@@ -2,8 +2,6 @@ from player import *
 from maps import *
 from battle import *
 
-
-
 def game_start():
     player.setLocation(Test())
     player.where_am_i()

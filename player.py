@@ -1,4 +1,5 @@
 from characters import *  # bring character functions
+import items
 
 
 class Player(Character):  # the player
@@ -62,6 +63,45 @@ class Player(Character):  # the player
     def print_health(self):
         hp = self.hp
         maxhp = self.maxhp
-        bar = '[' + '-' * int(((hp / maxhp) * 10)) + ']'
+        num_bars = int(((hp / maxhp) * 10))
+        bar = '[' + '*' * num_bars + ' ' * (10 - num_bars) + ']'
         bar = formatText(bar, 'GREEN')
-        return(bar)
+        return (bar)
+
+    def mod_gold(self, amt, add=True):  # modify player's gold
+        if any(isinstance(gold, items.Gold) for gold in self.inventory):  # if we already have a gold value
+            for gold in range(len(self.inventory)):  # loop thru inven
+                #print(self.inventory[gold]) DEBUG
+                if isinstance(self.inventory[gold], items.Gold):  # if we find the gold instance
+                    #print('Found gold at:', self.inventory[gold]) DEBUG
+                    if add is True:
+                        self.inventory[gold] += items.Gold(amt)
+                    else:
+                        self.inventory[gold] = items.Gold(amt)
+        else:
+            self.inventory.append(items.Gold(amt))
+
+    def show_inv(self):
+        print('Your Inventory')
+        print('----------')
+        msg = []
+        for i in self.inventory:
+            msg.append(str(i))
+        newmsg = '\n'.join(msg)
+        print(newmsg)
+
+    def checkitem(self, itype):
+        itype = getattr(items, itype)
+        for i in self.inventory:
+            if isinstance(i, itype):
+                #print(i, 'yes')
+                return True
+            else:
+                #print(i, 'no')
+                return False
+
+# if __name__ == '__main__':
+#     player = Player('Yas')
+#     player.checkitem('Gold')
+#     player.mod_gold(10)
+#     player.checkitem('Gold')

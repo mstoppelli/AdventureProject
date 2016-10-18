@@ -61,7 +61,8 @@ class Enemy(Character): # for combat specific vars, maybe make allies later
     def print_health(self):
         hp = self.hp
         maxhp = self.maxhp
-        bar = '[' + '-' * int(((hp / maxhp) * 10)) + ']'
+        num_bars = int(((hp / maxhp) * 10))
+        bar = '[' + '*' * num_bars + ' ' * (10 - num_bars) + ']'
         bar = formatText(bar, 'RED')
         return(bar)
 

@@ -15,11 +15,14 @@ def input_action():
 def battle(player, enemy):
     print('You are fighting a {}'.format(enemy))
     while player.is_alive() and enemy.is_alive():
+        clear()
         print('Player HP:', player.print_health())
         print('Enemy HP:', enemy.print_health())
         action = input_action()
         if action == 'attack':
+            clear()
             player.attack(enemy)
+            sleep(2)
         elif action == 'defend':
             raise NotImplementedError
         elif action == 'item':
@@ -28,7 +31,6 @@ def battle(player, enemy):
             raise NotImplementedError
         enemy.attack(player)
         sleep(2)
-        clear()
     if player.hp > 0:
         msg = 'You stand victorious! the {} is defeated.'.format(enemy.name)
         msg = formatText(msg, 'GREEN')
