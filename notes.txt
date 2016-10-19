@@ -2,3 +2,9 @@ Locations/World separated
 Locations as map classes
 locations have an explore event, grabs list of events that could happen
 dungeons can randomly get a "findexit" event after x explores
+
+EVENTS planning
+---------------
+Player is in map, uses explore command on game loop input.
+ Input calls explore event from the map we're in.
+  Explore event looks at list of events, picks one randomly (weighted plz) and calls said event's run_event.

@@ -54,7 +54,7 @@ class Enemy(Character): # for combat specific vars, maybe make allies later
     def attack(self, target):
         target.hp -= self.dmg
         dmg = formatText(str(self.dmg), 'BOLD')
-        msg = '{} attacked you. You took {} damage.'.format(self.name, dmg)
+        msg = '{} attacks {}. You took {} damage.'.format(self.name, target.name, dmg)
         msg = formatText(msg, 'RED')
         print(msg)
 
@@ -65,6 +65,12 @@ class Enemy(Character): # for combat specific vars, maybe make allies later
         bar = '[' + '*' * num_bars + ' ' * (10 - num_bars) + ']'
         bar = formatText(bar, 'RED')
         return(bar)
+
+    def mod_enemy(self, mod):
+        mods = [None, ['Strong', 2], ['Weak', -1]]
+        if mod != 0:
+            self.name = self.name + ' ' + mods[self.mod][0]
+            self.dmg += mods[self.mod][1]
 
 #---------Enemy Definitions-------
 class Rat(Enemy):

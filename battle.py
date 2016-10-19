@@ -13,11 +13,10 @@ def input_action():
 
 
 def battle(player, enemy):
-    print('You are fighting a {}'.format(enemy))
     while player.is_alive() and enemy.is_alive():
         clear()
-        print('Player HP:', player.print_health())
-        print('Enemy HP:', enemy.print_health())
+        print('{} HP:'.format(player.name), player.print_health())
+        print('{} HP:'.format(enemy.name), enemy.print_health())
         action = input_action()
         if action == 'attack':
             clear()

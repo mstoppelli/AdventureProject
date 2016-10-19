@@ -81,6 +81,9 @@ class Player(Character):  # the player
         else:
             self.inventory.append(items.Gold(amt))
 
+    def add_item(self, item):
+        self.inventory.append(item)
+
     def show_inv(self):
         print('Your Inventory')
         print('----------')
@@ -100,6 +103,11 @@ class Player(Character):  # the player
                 #print(i, 'no')
                 return False
 
+    def create_player(self):
+        name = input('What is your name?\n')
+        self.name = name
+
+player = Player('Player')
 # if __name__ == '__main__':
 #     player = Player('Yas')
 #     player.checkitem('Gold')
