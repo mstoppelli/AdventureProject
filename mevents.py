@@ -1,4 +1,5 @@
 import battle, characters
+from player import player
 
 
 class Event:
@@ -10,9 +11,8 @@ class Event:
 
 ###BATTLES###
 class BattleEvent(Event):
-    def __init__(self, player, enemy, mod=0, msg=''):
+    def __init__(self, enemy, mod=0, msg=''):
         self.enemy = enemy
-        self.player = player
         self.mod = mod
         super().__init__(msg)
         if self.msg == '':
@@ -21,23 +21,21 @@ class BattleEvent(Event):
             self.enemy.mod_enemy(self.mod)
 
     def run_event(self):
-        battle.battle(self.player, self.enemy)
+        battle.battle(player, self.enemy)
 
 class RatBattle(BattleEvent):
-    def __init__(self, player, mod=0):
+    def __init__(self, mod=0):
         self.mod = mod
-        super().__init__(player, characters.Rat(), self.mod)
+        super().__init__(characters.Rat(), self.mod)
 
 
 ###ITEMS###
 class LootEvent(Event):
-    def __init__(self, player, item):
-        self.player = player
+    def __init__(self, item):
         self.item = item
         msg = 'You find a {}!'.format(self.item)
         super().__init__(msg)
 
     def run_event(self):
         print(self.msg)
-        player = self.player
         player.add_item(self.item)

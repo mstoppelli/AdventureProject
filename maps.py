@@ -1,6 +1,6 @@
 from utilities import *
-from player import player
 from mevents import *
+import random
 
 
 # --------Base Types--------
@@ -34,7 +34,4 @@ class StartArea(Map):
                          description='A dark cave you\'ve awoken in. The walls are damp, and the air is thick.'
                                      'You should probably leave soon.',
                          adj_locations=[],
-                         events = [RatBattle(player)])
-
-    def explore(self):
-        raise NotImplementedError
+                         events = [RatBattle])
