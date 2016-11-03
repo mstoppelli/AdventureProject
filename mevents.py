@@ -7,7 +7,19 @@ class Event:
         self.msg = msg
 
     def run_event(self):
-        raise NotImplementedError
+        print(self.msg)
+
+
+###TESTS###
+class TestEventA(Event):
+    def __init__(self):
+        super().__init__('This is Event A')
+
+
+class TestEventB(Event):
+    def __init__(self):
+        super().__init__('This is Event B')
+
 
 ###BATTLES###
 class BattleEvent(Event):
@@ -22,6 +34,7 @@ class BattleEvent(Event):
 
     def run_event(self):
         battle.battle(player, self.enemy)
+
 
 class RatBattle(BattleEvent):
     def __init__(self, mod=0):

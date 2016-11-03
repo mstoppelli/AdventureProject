@@ -8,3 +8,4 @@ EVENTS planning
 Player is in map, uses explore command on game loop input.
  Input calls explore event from the map we're in.
   Explore event looks at list of events, picks one randomly (weighted plz) and calls said event's run_event.
+  !!!!!!!!!!!!omg it works!!!!!!!!!!
