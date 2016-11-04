@@ -9,6 +9,7 @@ class Player(Character):  # the player
         self.inventory = []  # should hold instances of items
         self.location = None  # current location
         self.equipment = {'weapon': None, 'armor': None, 'shield': None}  # what's equipped with keywords
+        self.spells = []
         super().__init__(name, 0, 2)  # set our name,
 
     def __str__(self):

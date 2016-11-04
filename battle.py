@@ -1,10 +1,10 @@
 from utilities import *
-from time import *
+from time import sleep
 
 
 def input_action():
     action = input('What would you like to do?')
-    actions = ['attack', 'defend', 'flee', 'item']
+    actions = ['attack', 'defend', 'flee', 'item', 'debug kill']
     if action in actions:
         return action
     else:
@@ -28,12 +28,15 @@ def battle(player, enemy):
             raise NotImplementedError
         elif action == 'item':
             raise NotImplementedError
+        elif action == 'debug kill':
+            enemy.hp = 0
         enemy.attack(player)
         sleep(2)
     if player.hp > 0:
         msg = 'You stand victorious! the {} is defeated.'.format(enemy.name)
         msg = formatText(msg, 'GREEN')
         print(msg)
+        sleep(3)
     elif enemy.hp > 0:
         msg = 'You have been defeated!'
         msg = formatText(msg, 'RED')

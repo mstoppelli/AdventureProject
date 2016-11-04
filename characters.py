@@ -53,7 +53,7 @@ class Enemy(Character): # for combat specific vars, maybe make allies later
 
     def attack(self, target):
         target.hp -= self.dmg
-        dmg = formatText(str(self.dmg), 'BOLD')
+        dmg = self.dmg
         msg = '{} attacks {}. You took {} damage.'.format(self.name, target.name, dmg)
         msg = formatText(msg, 'RED')
         print(msg)

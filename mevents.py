@@ -1,5 +1,6 @@
 import battle, characters
 from player import player
+from time import sleep
 
 
 class Event:
@@ -8,6 +9,7 @@ class Event:
 
     def run_event(self):
         print(self.msg)
+        sleep(3)
 
 
 ###TESTS###
@@ -52,3 +54,4 @@ class LootEvent(Event):
     def run_event(self):
         print(self.msg)
         player.add_item(self.item)
+        sleep(3)

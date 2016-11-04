@@ -9,7 +9,6 @@ class Map:
         self.name = name
         self.description = description
         self.adj_locations = adj_locations
-        self.actions = []
         self.events = events
 
     def __str__(self):
@@ -19,21 +18,17 @@ class Map:
         return self.description
 
     def build_events(self):
-        weighed_events = [] # empty list we'll append
-        for key in self.events: # loop through each event key
-            for i in range(key+1): # take the range of 0 to the key inclusive
-                weighed_events.append(self.events[key]) # for each number in the range, add the event to our list
+        weighed_events = []  # empty list we'll append
+        for key in self.events:  # loop through each event key
+            for i in range(key + 1):  # take the range of 0 to the key inclusive
+                weighed_events.append(self.events[key])  # for each number in the range, add the event to our list
         return weighed_events
 
     def explore(self):
         weighed_events = self.build_events()
-        re = random.randint(0, len(weighed_events)-1)
+        re = random.randint(0, len(weighed_events) - 1)
         chosen_event = weighed_events[re]
         chosen_event.run_event()
-
-
-
-
 
 
 class Test(Map):
@@ -44,7 +39,7 @@ class Test(Map):
 class StartArea(Map):
     def __init__(self):
         super().__init__(name='Dark Cave',
-                         description='A dark cave you\'ve awoken in. The walls are damp, and the air is thick.'
-                                     'You should probably leave soon.',
+                         description='A dark cave you\'ve awoken in. The walls are damp and the air thick.'
+                                     ' You should probably leave soon.',
                          adj_locations=[],
-                         events = {25: RatBattle(), 75:TestEventB()})
+                         events={25: RatBattle(), 75: TestEventB()})
