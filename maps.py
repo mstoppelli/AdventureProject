@@ -42,4 +42,4 @@ class StartArea(Map):
                          description='A dark cave you\'ve awoken in. The walls are damp and the air thick.'
                                      ' You should probably leave soon.',
                          adj_locations=[],
-                         events={25: RatBattle(), 75: TestEventB()})
+                         events={})

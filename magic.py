@@ -1,7 +1,7 @@
 from utilities import *
 # schools : 0:arcane, 1:fire, 2:earth, 3:water, 4:holy, 5:dark
 class Spell:
-    def __init__(self, name, cost, school, eff='', dmg=0, combat=1):
+    def __init__(self, name, cost, school, eff='', dmg=0, combat=True):
         self.name = name
         self.cost = cost
         self.school = school
@@ -21,20 +21,3 @@ class Spell:
         name = formatText(self.name, self._format_school())
         msg = '{} (Cost: {}) | {}'.format(name, self.cost, self.school_name())
         return msg
-
-    def effect(self, target):
-
-
-
-class MagicMissile(Spell):
-    def __init__(self):
-        super().__init__('Magic Missile', 1, 0)
-
-class HolyLight(Spell):
-    def __init__(self):
-        super().__init__('Holy Light', 1, 4)
-
-if __name__ == '__main__': # if we're testing the file
-    spells = [MagicMissile(), HolyLight()]
-    for spell in spells:
-        print(spell)

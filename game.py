@@ -1,6 +1,6 @@
 from maps import *
 from utilities import *
-import battle, characters
+import battle, characters, actions
 
 
 def game_start():
@@ -14,19 +14,12 @@ def game_start():
     # sleep(2)
     gameloop()
 
-def player_action():
-    action = input('What would you like to do?')
-    if action == 'explore':
-        player.location.explore()
-    if action == 'debug battle':
-        battle.battle(player, characters.Rat())
-
 def gameloop():
     while player.is_alive():
         clear()
         print('You are in {}'.format(player.location))
         print(player.location.describe())
-        player_action()
+        actions.player_action()
 
 game_start()
 # battle(player, Rat())

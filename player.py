@@ -16,12 +16,8 @@ class Player(Character):  # the player
         return "You"
 
     def description(self):
-        inv = []
-        for i in self.inventory:
-            inv += i.description
-            inv += '\n'
-        for i in inv:
-            print(i)
+        msg = 'It\'s you, {}. Your HP is {}.'.format(self.name, self.hp)
+        return msg
 
     def is_alive(self):
         if self.hp <= 0:
@@ -31,6 +27,9 @@ class Player(Character):  # the player
 
     def setLocation(self, location):
         self.location = location
+
+    def sethp(self, hp):
+        self.hp = hp
 
     def where_am_i(self):
         desc = 'You are in %s' % self.location

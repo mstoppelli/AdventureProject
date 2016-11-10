@@ -1,4 +1,4 @@
-import battle, characters
+import battle, characters, items
 from player import player
 from time import sleep
 
@@ -48,10 +48,17 @@ class RatBattle(BattleEvent):
 class LootEvent(Event):
     def __init__(self, item):
         self.item = item
-        msg = 'You find a {}!'.format(self.item)
+        msg = 'You find a {}!'.format(self.item.name)
         super().__init__(msg)
 
     def run_event(self):
         print(self.msg)
         player.add_item(self.item)
         sleep(3)
+
+class LootGold(LootEvent):
+    def __init__(self):
+        super().__init__(items.Gold(5))
+
+###EVENT TABLES### To add events, it's {Weight : Event}
+EVENT_StartArea = {}
