@@ -26,6 +26,8 @@ class Map:
 
     def explore(self):
         weighed_events = self.build_events()
+        if weighed_events == {}:
+            return
         re = random.randint(0, len(weighed_events) - 1)
         chosen_event = weighed_events[re]
         chosen_event.run_event()
@@ -42,4 +44,4 @@ class StartArea(Map):
                          description='A dark cave you\'ve awoken in. The walls are damp and the air thick.'
                                      ' You should probably leave soon.',
                          adj_locations=[],
-                         events={})
+                         events=EVENT_StartArea)

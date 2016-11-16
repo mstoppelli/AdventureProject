@@ -1,5 +1,6 @@
 from characters import *  # bring character functions
-import items
+import items, pickle
+from copy import copy
 
 
 class Player(Character):  # the player
@@ -84,6 +85,11 @@ class Player(Character):  # the player
     def add_item(self, item):
         self.inventory.append(item)
 
+    def get_money(self):
+        for i in self.inventory:
+            if isinstance(i, items.Gold):
+                return i.amt
+
     def show_inv(self):
         print('Your Inventory')
         print('----------')
@@ -107,6 +113,21 @@ class Player(Character):  # the player
         name = input('What is your name?\n')
         self.name = name
 
+    def save(self):
+        with open('savefile.dat', 'wb') as save:
+            pickle.dump(self, save, protocol=2)
+            print('Player Saved')
+
+    def load(self):
+        with open('savefile.dat', 'rb') as save:
+            ps = pickle.load(save)
+            self.mod_gold(ps.get_money, add=False)
+            self.inventory = copy(ps.inventory)
+            self.location = ps.location
+            self.spells = ps.spells
+            self.name = ps.name
+            self.sethp(ps.hp)
+            self.maxhp = ps.maxhp
 player = Player('Player')
 # if __name__ == '__main__':
 #     player = Player('Yas')

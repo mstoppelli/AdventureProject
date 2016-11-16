@@ -1,4 +1,5 @@
 from utilities import *
+import copy
 from time import sleep
 
 
@@ -13,14 +14,15 @@ def input_action():
 
 
 def battle(player, enemy):
-    while player.is_alive() and enemy.is_alive():
+    e = copy.copy(enemy)
+    while player.is_alive() and e.is_alive():
         clear()
         print('{} HP:'.format(player.name), player.print_health())
-        print('{} HP:'.format(enemy.name), enemy.print_health())
+        print('{} HP:'.format(e.name), e.print_health())
         action = input_action()
         if action == 'attack':
             clear()
-            player.attack(enemy)
+            player.attack(e)
             sleep(2)
         elif action == 'defend':
             raise NotImplementedError
@@ -29,15 +31,15 @@ def battle(player, enemy):
         elif action == 'item':
             raise NotImplementedError
         elif action == 'debug kill':
-            enemy.hp = 0
-        enemy.attack(player)
+            e.hp = 0
+        e.attack(player)
         sleep(2)
     if player.hp > 0:
-        msg = 'You stand victorious! the {} is defeated.'.format(enemy.name)
+        msg = 'You stand victorious! the {} is defeated.'.format(e.name)
         msg = formatText(msg, 'GREEN')
         print(msg)
         sleep(3)
-    elif enemy.hp > 0:
+    elif e.hp > 0:
         msg = 'You have been defeated!'
         msg = formatText(msg, 'RED')
         print(msg)

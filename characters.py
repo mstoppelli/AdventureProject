@@ -1,4 +1,5 @@
 from utilities import *
+import csv, random
 #----------Base Character Classes-------------
 class Character:  # Generic character class
     def __init__(self, name, disposition,
@@ -15,7 +16,7 @@ class Character:  # Generic character class
         return self.name  # print(Character()) Should just return it's name
 
     def calcdisp(self):  # Nice disposition name
-        dispositions = ['Hostile', 'Neutral', 'Friendly']  # <100, <51, <100
+        dispositions = ['Hostile', 'Neutral', 'Friendly']  # <0, <51, 100
         if self.disposition < 0:
             return formatText(dispositions[0], 'RED')
         elif self.disposition <= 50:
@@ -30,10 +31,11 @@ class Character:  # Generic character class
 
 
 class Enemy(Character): # for combat specific vars, maybe make allies later
-    def __init__(self, name, gender, hp, dmg): # we take same vars
+    def __init__(self, name, gender, hp, dmg, level): # we take same vars
         self.hp = hp # assign new ones (health and dmg)
         self.dmg = dmg
         self.maxhp = self.hp
+        self.level = level
         super().__init__(name, -100, gender) # pass the first 2 vars on, but disposition is always -100. they're enemies
 
     def _vowelcheck(self): # if hte name starts with a vowel, use an before name. else, a
@@ -44,6 +46,11 @@ class Enemy(Character): # for combat specific vars, maybe make allies later
 
     def __str__(self): # enemies referred to in generic name, not on name basis
         return '{} {}'.format(self._vowelcheck(), self.name)
+
+    def description(self):  # Should be used when we describe a character
+        line1 = 'You see {} {}. {} is {}.\n'.format(self._vowelcheck(), self.name, self._genpronoun(),
+                                                 self.calcdisp())  # Their name, gender and disposition
+        return line1
 
     def is_alive(self):
         if self.hp <= 0:
@@ -69,17 +76,48 @@ class Enemy(Character): # for combat specific vars, maybe make allies later
     def mod_enemy(self, mod):
         mods = [None, ['Strong', 2], ['Weak', -1]]
         if mod != 0:
-            self.name = self.name + ' ' + mods[self.mod][0]
-            self.dmg += mods[self.mod][1]
+            self.name = mods[mod][0] + ' ' + self.name
+            self.dmg += mods[mod][1]
 
-#---------Enemy Definitions-------
-class Rat(Enemy):
-    def __init__(self):
-        self.name = 'Rat'
-        self.gender = 2
-        self.hp = 10
-        self.dmg = 2
-        super().__init__(self.name, self.gender, self.hp, self.dmg)
+#---------Enemy Definitions------- Outdated, trying to move to csv
+# class Rat(Enemy):
+#     def __init__(self):
+#         self.name = 'Rat'
+#         self.gender = 2
+#         self.hp = 10
+#         self.dmg = 2
+#         super().__init__(self.name, self.gender, self.hp, self.dmg)
+enemies = []
+def load_enemies():
+    enemy_file = open('enemies.csv', 'r')
+    enemy_csv = csv.reader(enemy_file, delimiter=',')
+    row_num = 1
+
+    for row in enemy_csv:
+        if row_num == 1:
+            row_num += 1
+            continue
+
+        e_name = row[0]
+        e_gender = int(row[1])
+        e_hp = int(row[2])
+        e_dmg = int(row[3])
+        e_level = int(row[4])
+        #print('Loaded {} with HP; {} and DMG: {}'.format(e_name, e_hp, e_dmg))
+        enemy = Enemy(e_name, e_gender, e_hp, e_dmg, e_level)
+        global enemies
+        enemies.append(enemy)
+
+def random_enemy(level):
+    re = []
+    for e in enemies:
+        if e.level == level:
+            re.append(e)
+    i = random.randint(0, len(re)-1)
+    return re[i]
+
+
+
 
 # jim = Character('Jim', 50, 0)
 # jane = Character('Jane', 51, 1)
@@ -87,3 +125,7 @@ class Rat(Enemy):
 # for i in in_room:
 #     print(i)
 #     print(i.description())
+if __name__ == '__main__':
+    load_enemies()
+    for e in enemies:
+        print(e.description())

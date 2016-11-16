@@ -1,6 +1,8 @@
+import characters, actions
+characters.load_enemies()
 from maps import *
 from utilities import *
-import battle, characters, actions
+
 
 
 def game_start():
