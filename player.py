@@ -115,7 +115,7 @@ class Player(Character):  # the player
 
     def save(self):
         with open('savefile.dat', 'wb') as save:
-            pickle.dump(self, save, protocol=2)
+            pickle.dump(self, save, protocol=pickle.HIGHEST_PROTOCOL)
             print('Player Saved')
 
     def load(self):
@@ -123,8 +123,8 @@ class Player(Character):  # the player
             ps = pickle.load(save)
             self.mod_gold(ps.get_money, add=False)
             self.inventory = copy(ps.inventory)
-            self.location = ps.location
-            self.spells = ps.spells
+            self.location = copy(ps.location)
+            self.spells = copy(ps.spells)
             self.name = ps.name
             self.sethp(ps.hp)
             self.maxhp = ps.maxhp
